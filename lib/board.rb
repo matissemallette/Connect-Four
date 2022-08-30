@@ -11,7 +11,7 @@ class Board
 	def populate_board
 		for row in 1..6 do
 			for column in 1..7 do
-				@contents[row - 1][column - 1] = Cell.new(row, column, 'x')
+				@contents[row - 1][column - 1] = Cell.new(row, column, '.')
 			end
 		end
 	end

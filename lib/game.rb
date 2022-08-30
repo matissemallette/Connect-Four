@@ -1,10 +1,17 @@
+require './lib/board'
+require './lib/cell'
+
+
 class Game
   attr_reader :running, 
-              :has_printed_welcome
+              :has_printed_welcome, 
+              :board
 
   def initialize 
     @running = false 
     @has_printed_welcome = false
+    @board = Board.new 
+    @board.populate_board
   end
 
   def welcome_greeting
@@ -24,5 +31,6 @@ class Game
 
   def start 
     @running = true 
+    @board.render
   end
 end
