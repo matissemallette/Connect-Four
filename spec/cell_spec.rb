@@ -16,6 +16,16 @@ RSpec.describe Cell do
 		expect(@cell.content).to eq('.')
 	end
 
+	it 'has writable attributes' do 
+		cell2 = Cell.new(0, 0, '.')
+		cell2.row = 4
+		cell2.column = 3
+		cell2.content = 'X'
+		expect(cell2.row).to eq(4)
+		expect(cell2.column).to eq(3)
+		expect(cell2.content).to eq('X')
+	end
+
 	it 'does not have chip in it' do
 		expect(@cell.empty?).to eq(true)
 	end
