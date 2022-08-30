@@ -25,4 +25,5 @@ RSpec.describe Board do
 		@board.populate_board
 		@board.render
 	end
+
 end
