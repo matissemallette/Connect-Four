@@ -26,4 +26,46 @@ class Board
 			puts "\n"
 		end
 	end
+
+	def is_occupied?(row, column) 
+		if @contents[row][column].content != '.'
+			return true
+		else
+			return false
+		end
+	end
+
+	def drop(column_letter, value)
+		if column_letter.downcase == 'a'
+			column_number = 0
+		elsif column_letter.downcase == 'b'
+			column_number = 1
+		elsif column_letter.downcase == 'c'
+			column_number = 2
+		elsif column_letter.downcase == 'd'
+			column_number = 3
+		elsif column_letter.downcase == 'e'
+			column_number = 4
+		elsif column_letter.downcase == 'f'
+			column_number = 5
+		elsif column_letter.downcase == 'g'
+			column_number = 6
+		else
+			# if input is invalid, defaults to A aka first aka 0th column
+			column_number = 0
+		end
+
+		bottom_of_column = 0
+		for i in 0..5 do
+			if self.is_occupied?(i, column_number) == true 
+				bottom_of_column = i - 1
+				break
+			end
+
+			if i == 5 && self.is_occupied?(i, column_number) == false
+				bottom_of_column = 5
+			end
+		end
+		@contents[bottom_of_column][column_number].content = value
+	end
 end
