@@ -35,13 +35,18 @@ class Game
   end
 
   def turn 
-    puts "Please select a column (a-g) to drop your chip!"
+    puts "Please select a column (a-g) to drop your chip! Type quit to exit the game."
     input = $stdin.gets.chomp.downcase
     if valid_input?(input) == true 
       #game shit will live here. 
+      @board.drop(input, 'x')
+      @board.render
+      self.turn
+    elsif input == "quit"
+      return
     else 
-       puts "Invalid input, please try again."
-       self.turn
+      puts "Invalid input, please try again."
+      self.turn
     end
   end
 
