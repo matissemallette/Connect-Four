@@ -17,14 +17,16 @@ class Board
 	end
 
 	def render
-		puts "\n"
+
+			print "\ncolumns: A, B, C, D, E, F, G\n"
 		for row in 1..6 do
 			print "row #{row} >> "
 			for column in 1..7 do
-				print "#{@contents[row - 1][column - 1].content}"
+				print "#{@contents[row - 1][column - 1].content}  "
 			end
 			puts "\n"
 		end
+		puts "\n"
 	end
 
 	def is_occupied?(row, column) 
