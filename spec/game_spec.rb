@@ -23,4 +23,11 @@ RSpec.describe Game do
     game2.start
     expect(game2.running).to eq(true)
   end
+
+  it 'checks if input is a valid choice' do 
+    game2 = Game.new
+
+    expect(game2.valid_input?('g')).to eq(true)
+    expect(game2.valid_input?('z')).to eq(false)
+  end
 end

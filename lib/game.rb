@@ -33,4 +33,23 @@ class Game
     @running = true 
     @board.render
   end
+
+  def turn 
+    puts "Please select a column (a-g) to drop your chip!"
+    input = $stdin.gets.chomp.downcase
+    if valid_input?(input) == true 
+      #game shit will live here. 
+    else 
+       puts "Invalid input, please try again."
+       self.turn
+    end
+  end
+
+  def valid_input?(input)
+    if ['a', 'b', 'c', 'd', 'e', 'f', 'g'].include?(input)
+      return true 
+    else 
+      return false
+    end
+  end
 end
