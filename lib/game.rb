@@ -7,8 +7,9 @@ class Game
               :has_printed_welcome, 
               :board
 
-  def initialize 
+  def initialize
     @running = false 
+    @wants_to_play = true
     @has_printed_welcome = false
     @board = Board.new 
     @board.populate_board
@@ -16,41 +17,59 @@ class Game
   end
 
   def welcome_greeting
-    puts "Welcome to CONNECT FOUR."
-    puts "Enter p to play. Enter q to quit."
-    @has_printed_welcome = true 
-    play_or_quit = $stdin.gets.chomp.downcase
-    if play_or_quit == "p"
-      self.start
-    elsif play_or_quit == "q"
-      puts "Bye sucka, don't let the door hit ya on the way out."
-    else 
-      puts 'Invalid Input, try again.'
-      self.welcome_greeting
-    end 
+    while @wants_to_play == true do 
+      puts "Welcome to CONNECT FOUR."
+      puts "Enter p to play. Enter quit to quit."
+      @has_printed_welcome = true 
+      play_or_quit = $stdin.gets.chomp.downcase
+      if play_or_quit == "p"
+        self.start
+      elsif play_or_quit == "quit"
+        @running = false
+        @wants_to_play = false
+        puts "Bye sucka, don't let the door hit ya on the way out. running = #{@running}"
+      else 
+        puts 'Invalid Input, try again.'
+      end 
+    end
   end
 
   def start 
     @running = true 
-    @board.render
-    self.turn
+
+    while @running == true 
+      self.turn
+    end
   end
 
   def turn 
-    puts "Please select a column (a-g) to drop your chip! Type quit to exit the game."
-    input = $stdin.gets.chomp.downcase
-    if valid_input?(input) == true 
-      #game shit will live here. 
-      @board.drop(input, 'x')
-      @robot.make_decision(@board)
-      @board.drop(@robot.current_decision, 'o')
-      @board.render
-      self.turn
-    elsif input == "quit"
+    @board.render
+
+    if @board.is_full? == true 
+      puts "The board is full, the game is a draw.\n\n"
+      @board.populate_board
+      @running = false
       return
+    end
+
+    puts "Please select a column (a-g) to drop your chip! Type quit to exit the game."
+    input = $stdin.gets.chomp.to_s.downcase
+
+    if valid_input?(input) == true 
+
+      if @board.is_occupied?(0, self.letter_to_number_map(input)) == true
+        puts "that column is full, choose another column"
+      else
+        @board.drop(input, 'x')
+        @robot.make_decision(@board)
+        @board.drop(@robot.current_decision, 'o')
+        @board.render
+      end
+
+    elsif input == "quit"
+      @running = false
     else 
       puts "Invalid input, please try again."
-      self.turn
     end
   end
 
@@ -61,4 +80,23 @@ class Game
       return false
     end
   end
+
+  def letter_to_number_map(input)
+		if self.valid_input?(input) == false 
+      puts "invalid input"
+      return nil
+		end
+
+		letter_to_num_map = {
+			'a'=>0,
+			'b'=>1,
+			'c'=>2,
+			'd'=>3,
+			'e'=>4,
+      'f'=>5,
+      'g'=>6,
+		} 
+
+    return letter_to_num_map[input]
+	end
 end
