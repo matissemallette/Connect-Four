@@ -1,6 +1,6 @@
 require './lib/board'
 require './lib/cell'
-
+require './lib/robot'
 
 class Game
   attr_reader :running, 
@@ -12,6 +12,7 @@ class Game
     @has_printed_welcome = false
     @board = Board.new 
     @board.populate_board
+    @robot = Robot.new
   end
 
   def welcome_greeting
@@ -40,6 +41,8 @@ class Game
     if valid_input?(input) == true 
       #game shit will live here. 
       @board.drop(input, 'x')
+      @robot.make_decision(@board)
+      @board.drop(@robot.current_decision, 'o')
       @board.render
       self.turn
     elsif input == "quit"
