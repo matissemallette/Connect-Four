@@ -75,7 +75,7 @@ class Board
 		is_full = true
 
 		@contents.each do |cell|
-			if cell.empty? == true
+			if cell.empty? == true 
 				is_full = false
 			end
 		end

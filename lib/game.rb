@@ -33,6 +33,7 @@ class Game
   def start 
     @running = true 
     @board.render
+    self.turn
   end
 
   def turn 
