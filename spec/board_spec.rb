@@ -56,5 +56,10 @@ RSpec.describe Board do
       board2.drop('g', 'O')
     end
     expect(board2.is_full?).to eq(true)
+
+		board3 = @board 
+		board3.populate_board
+
+		expect(board3.is_full?).to eq(false)
   end
 end

@@ -74,9 +74,11 @@ class Board
 	def is_full?
 		is_full = true
 
-		@contents.each do |cell|
-			if cell.empty? == true
-				is_full = false
+		@contents.each do |row|
+			row.each do |cell| 
+				if cell.empty? == true 
+					is_full = false
+				end
 			end
 		end
 
