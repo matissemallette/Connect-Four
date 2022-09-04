@@ -42,4 +42,19 @@ RSpec.describe Board do
 		board2.render
 		expect(board2.contents[5][0].content).to eq('X')
 	end
+
+	it 'tells us if board is full' do
+    board2 = @board
+		board2.populate_board
+    6.times do
+      board2.drop('a', 'O')
+      board2.drop('b', 'O')
+      board2.drop('c', 'O')
+      board2.drop('d', 'O')
+      board2.drop('e', 'O')
+      board2.drop('f', 'O')
+      board2.drop('g', 'O')
+    end
+    expect(board2.is_full?).to eq(true)
+  end
 end

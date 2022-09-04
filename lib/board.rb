@@ -70,4 +70,16 @@ class Board
 		end
 		@contents[bottom_of_column][column_number].content = value
 	end
+
+	def is_full?
+		is_full = true
+
+		@contents.each do |cell|
+			if cell.empty? == true
+				is_full = false
+			end
+		end
+
+		return is_full 
+	end
 end
