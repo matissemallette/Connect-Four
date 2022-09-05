@@ -3,6 +3,7 @@ require './lib/cell'
 
 class Board
 	attr_reader :contents
+	attr_writer :contents
 
 	def initialize
 		@contents = Array.new(6) { Array.new(7) }
@@ -17,11 +18,12 @@ class Board
 	end
 
 	def render
-
+		num_of_rows = contents.size
+		num_of_columns = contents[0].size
 			print "\ncolumns: A, B, C, D, E, F, G\n"
-		for row in 1..6 do
+		for row in 1..num_of_rows do
 			print "row #{row} >> "
-			for column in 1..7 do
+			for column in 1..num_of_columns do
 				print "#{@contents[row - 1][column - 1].content}  "
 			end
 			puts "\n"
@@ -73,7 +75,6 @@ class Board
 
 	def is_full?
 		is_full = true
-
 		@contents.each do |row|
 			row.each do |cell| 
 				if cell.empty? == true 
@@ -81,7 +82,10 @@ class Board
 				end
 			end
 		end
-
 		return is_full 
+	end
+
+	def rotated_contents 
+		@contents.transpose.map(&:reverse)
 	end
 end
