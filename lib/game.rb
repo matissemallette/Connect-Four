@@ -27,7 +27,7 @@ class Game
       elsif play_or_quit == "quit"
         @running = false
         @wants_to_play = false
-        puts "Bye sucka, don't let the door hit ya on the way out. running = #{@running}"
+        puts "Bye sucka, don't let the door hit ya on the way out."
       else 
         puts 'Invalid Input, try again.'
       end 
