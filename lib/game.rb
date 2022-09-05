@@ -1,6 +1,7 @@
 require './lib/board'
 require './lib/cell'
 require './lib/robot'
+require './lib/logic'
 
 class Game
   attr_reader :running, 
@@ -14,6 +15,7 @@ class Game
     @board = Board.new 
     @board.populate_board
     @robot = Robot.new
+    @logic = Logic.new
   end
 
   def welcome_greeting
@@ -27,7 +29,7 @@ class Game
       elsif play_or_quit == "quit"
         @running = false
         @wants_to_play = false
-        puts "Bye sucka, don't let the door hit ya on the way out. running = #{@running}"
+        puts "Bye sucka, don't let the door hit ya on the way out."
       else 
         puts 'Invalid Input, try again.'
       end 
@@ -36,7 +38,7 @@ class Game
 
   def start 
     @running = true 
-
+    @board.populate_board
     while @running == true 
       self.turn
     end
@@ -61,8 +63,16 @@ class Game
         puts "that column is full, choose another column"
       else
         @board.drop(input, 'x')
+        if @logic.horizontal_win(@board, 'x') || @logic.vertical_win(@board, 'x') 
+          puts 'Player wins!!'
+          @running = false
+        end
         @robot.make_decision(@board)
         @board.drop(@robot.current_decision, 'o')
+        if @logic.horizontal_win(@board, 'o') || @logic.vertical_win(@board, 'o') 
+          puts 'Computer wins!!'
+          @running = false
+        end
         @board.render
       end
 
