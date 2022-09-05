@@ -88,4 +88,12 @@ class Board
 	def rotated_contents 
 		@contents.transpose.map(&:reverse)
 	end
+
+	def mirrored_contents 
+		mirrored_contents = []
+		@contents.each do |row| 
+			mirrored_contents << row.reverse
+		end
+		return mirrored_contents
+	end
 end
