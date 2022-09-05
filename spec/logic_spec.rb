@@ -77,4 +77,50 @@ RSpec.describe Logic do
 
     expect(@logic.horizontal_win(board, 'o')).to eq(true)
   end
+
+  it 'can detect if player wins diagonally' do
+    board = Board.new
+    board.populate_board
+    board.drop('a', 'x')
+    board.drop('b', 'o')
+    board.drop('b', 'x')
+    2.times { board.drop('c', 'o') }
+    board.drop('c', 'x')
+    3.times { board.drop('d', 'o') }
+    board.drop('d', 'x')
+    board.render
+
+    expect(@logic.diagonal_win(board, 'x')).to eq(true)
+
+    mirrored_board = Board.new 
+    mirrored_board.populate_board
+    mirrored_board.contents = board.mirrored_contents
+    mirrored_board.render 
+
+    expect(@logic.diagonal_win(mirrored_board, 'x')).to eq(true)
+  end
+
+  it 'can detect if a player loses diagonally' do 
+    puts "this board should lose: "
+    
+    loser_board = Board.new
+    loser_board.populate_board 
+    loser_board.drop('b', 'o')
+    loser_board.drop('b', 'x')
+    2.times { loser_board.drop('c', 'o') }
+    loser_board.drop('c', 'x')
+    3.times { loser_board.drop('d', 'o') }
+    loser_board.drop('d', 'x')
+    loser_board.render
+
+    expect(@logic.diagonal_win(loser_board, 'x')).to eq(false)
+
+    puts "this board should win: "
+
+    loser_board.drop('a', 'x')
+
+    loser_board.render 
+
+    expect(@logic.diagonal_win(loser_board, 'x')).to eq(true)
+  end
 end

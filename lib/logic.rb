@@ -30,5 +30,49 @@ class Logic
     return chars
   end
 
-  
+  def diagonal_win(board, character)
+    win = false 
+    win = test_diagonal_win(board, character)
+    if win == false 
+      reversed_board = Board.new
+      reversed_board.populate_board
+      reversed_board.contents = board.mirrored_contents
+      win = test_diagonal_win(reversed_board, character)
+    end
+    return win 
+  end
+
+  def test_diagonal_win(board, character)
+    num_of_rows = board.contents.length 
+    num_of_columns = board.contents[0].length
+
+    horizontal_search_range = num_of_columns - 4
+    vertical_search_range = num_of_rows - 4 
+
+    for r in num_of_rows.downto(vertical_search_range)
+      for c in 0..horizontal_search_range
+        current_diagonal_selection = []
+        for i in 0..3 do 
+          current_diagonal_selection << board.contents[r - 1 - i][c + i].content 
+        end
+
+        p current_diagonal_selection
+
+        if current_diagonal_selection.include?(character) 
+
+          if current_diagonal_selection.uniq.size <= 1 
+      
+            print "found a diagonal connect four in: "
+            p current_diagonal_selection
+            puts "\n"
+
+            return true
+            
+          end
+        end
+      end
+    end
+
+    return false
+  end
 end
