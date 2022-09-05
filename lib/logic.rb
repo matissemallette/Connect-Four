@@ -56,15 +56,15 @@ class Logic
           current_diagonal_selection << board.contents[r - 1 - i][c + i].content 
         end
 
-        p current_diagonal_selection
+        # p current_diagonal_selection
 
         if current_diagonal_selection.include?(character) 
 
           if current_diagonal_selection.uniq.size <= 1 
       
-            print "found a diagonal connect four in: "
-            p current_diagonal_selection
-            puts "\n"
+            # print "found a diagonal connect four in: "
+            # p current_diagonal_selection
+            # puts "\n"
 
             return true
             

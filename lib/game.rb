@@ -63,16 +63,25 @@ class Game
         puts "that column is full, choose another column"
       else
         @board.drop(input, 'x')
+
         if @logic.horizontal_win(@board, 'x') || @logic.vertical_win(@board, 'x') 
-          puts 'Player wins!!'
-          @running = false
+          self.player_wins
         end
+        if @logic.diagonal_win(@board, 'x') == true 
+          self.player_wins
+        end
+
         @robot.make_decision(@board)
         @board.drop(@robot.current_decision, 'o')
-        if @logic.horizontal_win(@board, 'o') || @logic.vertical_win(@board, 'o') 
-          puts 'Computer wins!!'
-          @running = false
+
+        if @logic.horizontal_win(@board, 'o') || @logic.vertical_win(@board, 'o')
+          self.robot_wins
         end
+
+        if @logic.diagonal_win(@board, 'o') == true
+          self.robot_wins
+        end
+
         @board.render
       end
 
@@ -109,4 +118,14 @@ class Game
 
     return letter_to_num_map[input]
 	end
+
+  def player_wins
+    puts "Player wins!"
+    @running = 0
+  end
+
+  def robot_wins 
+    puts "Robot wins!"
+    @running = 0
+  end
 end
