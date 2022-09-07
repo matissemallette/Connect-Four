@@ -23,6 +23,10 @@ RSpec.describe Game do
     expect(game2.running).to eq(true)
   end
 
+  it 'can take a turn' do 
+    
+  end
+
   it 'checks if input is a valid choice' do 
     game2 = Game.new
     game2.turn 
