@@ -42,6 +42,13 @@ RSpec.describe Board do
 		expect(board2.contents[5][0]).to eq('X')
 	end
 
+	it 'has letter-to-column helper method' do
+		expect(@board.letter_to_column('a')).to eq(0)
+		expect(@board.letter_to_column('b')).to eq(1)
+		expect(@board.letter_to_column('g')).to eq(6)
+		expect(@board.letter_to_column('x')).to eq(0)
+	end
+
 	it 'tells us if board is full' do
     board2 = @board
 		board2.populate_board
