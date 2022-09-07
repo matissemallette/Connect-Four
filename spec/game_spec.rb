@@ -20,7 +20,7 @@ RSpec.describe Game do
   it 'can start the game' do 
     game2 = Game.new
     game2.start
-    expect(game2.running).to eq(true)
+    expect(game2.has_started).to eq(true)
   end
 
   it 'checks if input is a valid choice' do 

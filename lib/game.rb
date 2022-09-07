@@ -6,12 +6,14 @@ class Game
   attr_reader :running, 
               :has_printed_welcome, 
               :board, 
-              :can_run_turn
+              :can_run_turn,
+              :has_started
 
   def initialize
     @running = false 
     @wants_to_play = true
     @has_printed_welcome = false
+    @has_started = false
     @board = Board.new 
     @board.populate_board
     @robot = Robot.new
@@ -38,6 +40,7 @@ class Game
   end
 
   def start 
+    @has_started = true
     @running = true 
     @board.populate_board
     while @running == true 
@@ -108,17 +111,7 @@ class Game
       return nil
 		end
 
-		letter_to_num_map = {
-			'a'=>0,
-			'b'=>1,
-			'c'=>2,
-			'd'=>3,
-			'e'=>4,
-      'f'=>5,
-      'g'=>6,
-		} 
-
-    return letter_to_num_map[input]
+    return @board.letter_to_column(input)
 	end
 
   def player_wins
