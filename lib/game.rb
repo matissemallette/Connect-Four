@@ -43,14 +43,13 @@ class Game
     @has_started = true
     @running = true 
     @board.populate_board
+    @board.render
     while @running == true 
       self.turn
     end
   end
 
   def turn 
-    @board.render
-
     if @board.is_full? == true 
       self.board_full
       return
