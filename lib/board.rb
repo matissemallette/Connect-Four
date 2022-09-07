@@ -42,24 +42,7 @@ class Board
 	end
 
 	def drop(column_letter, value)
-		if column_letter.downcase == 'a'
-			column_number = 0
-		elsif column_letter.downcase == 'b'
-			column_number = 1
-		elsif column_letter.downcase == 'c'
-			column_number = 2
-		elsif column_letter.downcase == 'd'
-			column_number = 3
-		elsif column_letter.downcase == 'e'
-			column_number = 4
-		elsif column_letter.downcase == 'f'
-			column_number = 5
-		elsif column_letter.downcase == 'g'
-			column_number = 6
-		else
-			column_number = 0
-		end
-
+		column_number = letter_to_column(column_letter)
 		bottom_of_column = 0
 		for i in 0..5 do
 			if self.is_occupied?(i, column_number) == true 
@@ -72,6 +55,23 @@ class Board
 			end
 		end
 		@contents[bottom_of_column][column_number] = value
+	end
+
+	def letter_to_column(column_letter)
+		letter_to_num_map = {
+			'a'=>0,
+			'b'=>1,
+			'c'=>2,
+			'd'=>3,
+			'e'=>4,
+      'f'=>5,
+      'g'=>6,
+		} 
+		column_number = letter_to_num_map[column_letter]
+		if ['a', 'b','c','d','e','f','g'].include?(column_letter) == false 
+			column_number = 0
+		end
+		return column_number
 	end
 
 	def is_full?

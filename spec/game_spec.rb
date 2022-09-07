@@ -12,22 +12,18 @@ RSpec.describe Game do
   end
 
   it 'can print welcome message' do 
-    game2 = Game.new 
-    game2.welcome_greeting
-    expect(game2.has_printed_welcome).to eq(true)
+    @game.welcome_greeting
+    expect(@game.has_printed_welcome).to eq(true)
   end
 
   it 'can start the game' do 
-    game2 = Game.new
-    game2.start
-    expect(game2.running).to eq(true)
+    @game.start
+    expect(@game.has_started).to eq(true)
   end
 
   it 'checks if input is a valid choice' do 
-    game2 = Game.new
-    game2.turn 
-
-    expect(game2.valid_input?('g')).to eq(true)
-    expect(game2.valid_input?('z')).to eq(false)
+    @game.turn 
+    expect(@game.valid_input?('g')).to eq(true)
+    expect(@game.valid_input?('z')).to eq(false)
   end
 end

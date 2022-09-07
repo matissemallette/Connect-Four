@@ -6,12 +6,14 @@ class Game
   attr_reader :running, 
               :has_printed_welcome, 
               :board, 
-              :can_run_turn
+              :can_run_turn,
+              :has_started
 
   def initialize
     @running = false 
     @wants_to_play = true
     @has_printed_welcome = false
+    @has_started = false
     @board = Board.new 
     @board.populate_board
     @robot = Robot.new
@@ -38,6 +40,7 @@ class Game
   end
 
   def start 
+    @has_started = true
     @running = true 
     @board.populate_board
     while @running == true 
@@ -49,9 +52,7 @@ class Game
     @board.render
 
     if @board.is_full? == true 
-      puts "The board is full, the game is a draw.\n\n"
-      @board.populate_board
-      @running = false
+      self.board_full
       return
     end
 
@@ -65,21 +66,14 @@ class Game
       else
         @board.drop(input, 'x')
 
-        if @logic.horizontal_win(@board, 'x') || @logic.vertical_win(@board, 'x') 
-          self.player_wins
-        end
-        if @logic.diagonal_win(@board, 'x') == true 
-          self.player_wins
+        if self.check_for_winner(@board, 'x') == true 
+          self.player_wins 
         end
 
         @robot.make_decision(@board)
         @board.drop(@robot.current_decision, 'o')
 
-        if @logic.horizontal_win(@board, 'o') || @logic.vertical_win(@board, 'o')
-          self.robot_wins
-        end
-
-        if @logic.diagonal_win(@board, 'o') == true
+        if self.check_for_winner(@board, 'o') == true 
           self.robot_wins
         end
 
@@ -108,17 +102,7 @@ class Game
       return nil
 		end
 
-		letter_to_num_map = {
-			'a'=>0,
-			'b'=>1,
-			'c'=>2,
-			'd'=>3,
-			'e'=>4,
-      'f'=>5,
-      'g'=>6,
-		} 
-
-    return letter_to_num_map[input]
+    return @board.letter_to_column(input)
 	end
 
   def player_wins
@@ -129,5 +113,21 @@ class Game
   def robot_wins 
     puts "=======Robot wins!======="
     @running = false
+  end
+
+  def board_full 
+    puts "The board is full, the game is a draw.\n\n"
+    @board.populate_board
+    @running = false
+  end
+
+  def check_for_winner(board, winner_symbol)
+    if @logic.horizontal_win(board, winner_symbol) 
+      return true
+    elsif @logic.vertical_win(board, winner_symbol)
+      return true
+    elsif @logic.diagonal_win(board, winner_symbol)
+      return true
+    end
   end
 end
