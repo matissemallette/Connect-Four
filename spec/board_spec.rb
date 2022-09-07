@@ -21,8 +21,8 @@ RSpec.describe Board do
 	end
 
   it 'can render contents' do
-		@board.populate_board
-		
+		@board.render
+		expect(@board.can_render).to eq(true)
 	end
 
 	it 'can check contents of cell' do

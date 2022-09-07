@@ -1,11 +1,13 @@
 require 'pry'
 
 class Board
-	attr_reader :contents
+	attr_reader :contents, 
+							:can_render
 	attr_writer :contents
 
 	def initialize
 		@contents = Array.new(6) { Array.new(7) }
+		@can_render = false
 	end
 
 	def populate_board
@@ -27,6 +29,7 @@ class Board
 			end
 			puts "\n"
 		end
+		@can_render = true
 		puts "\n"
 	end
 
