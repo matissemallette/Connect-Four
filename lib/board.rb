@@ -57,7 +57,6 @@ class Board
 		elsif column_letter.downcase == 'g'
 			column_number = 6
 		else
-			# if input is invalid, defaults to A aka first aka 0th column
 			column_number = 0
 		end
 

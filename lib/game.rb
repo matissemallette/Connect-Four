@@ -1,5 +1,4 @@
 require './lib/board'
-require './lib/cell'
 require './lib/robot'
 require './lib/logic'
 
