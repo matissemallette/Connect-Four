@@ -52,9 +52,7 @@ class Game
     @board.render
 
     if @board.is_full? == true 
-      puts "The board is full, the game is a draw.\n\n"
-      @board.populate_board
-      @running = false
+      self.board_full
       return
     end
 
@@ -121,6 +119,12 @@ class Game
 
   def robot_wins 
     puts "=======Robot wins!======="
+    @running = false
+  end
+
+  def board_full 
+    puts "The board is full, the game is a draw.\n\n"
+    @board.populate_board
     @running = false
   end
 end
