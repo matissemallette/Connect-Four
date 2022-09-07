@@ -26,7 +26,7 @@ RSpec.describe Robot do
       board.drop('g', 'O')
     end
 
-    puts "\n" # just so that the output on the first line looks clean
+    puts "\n" 
 
     puts "before robot makes his move:"
     board.render

@@ -120,12 +120,12 @@ class Game
 	end
 
   def player_wins
-    puts "Player wins!"
+    puts "=======Player wins!======="
     @running = 0
   end
 
   def robot_wins 
-    puts "Robot wins!"
+    puts "=======Robot wins!======="
     @running = 0
   end
 end

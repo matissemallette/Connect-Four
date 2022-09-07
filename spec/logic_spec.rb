@@ -35,10 +35,7 @@ RSpec.describe Logic do
   it 'will detect a vertical win' do 
     board = Board.new
     board.populate_board
-    board.drop('a', 'x')
-    board.drop('a', 'x')
-    board.drop('a', 'x')
-    board.drop('a', 'x')
+    4.times {board.drop('a', 'x')}
     board.render
 
     expect(@logic.vertical_win(board, 'x')).to eq(true)
@@ -57,10 +54,7 @@ RSpec.describe Logic do
   it 'can detect if robot wins veritcally' do 
     board = Board.new
     board.populate_board
-    board.drop('a', 'o')
-    board.drop('a', 'o')
-    board.drop('a', 'o')
-    board.drop('a', 'o')
+    4.times {board.drop('a', 'o')}
     board.render
 
     expect(@logic.vertical_win(board, 'o')).to eq(true)
@@ -101,8 +95,6 @@ RSpec.describe Logic do
   end
 
   it 'can detect if a player loses diagonally' do 
-    puts "this board should lose: "
-    
     loser_board = Board.new
     loser_board.populate_board 
     loser_board.drop('b', 'o')
@@ -115,10 +107,7 @@ RSpec.describe Logic do
 
     expect(@logic.diagonal_win(loser_board, 'x')).to eq(false)
 
-    puts "this board should win: "
-
     loser_board.drop('a', 'x')
-
     loser_board.render 
 
     expect(@logic.diagonal_win(loser_board, 'x')).to eq(true)
