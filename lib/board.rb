@@ -1,5 +1,4 @@
 require 'pry'
-require './lib/cell'
 
 class Board
 	attr_reader :contents
@@ -12,7 +11,7 @@ class Board
 	def populate_board
 		for row in 1..6 do
 			for column in 1..7 do
-				@contents[row - 1][column - 1] = Cell.new('.')
+				@contents[row - 1][column - 1] = "."
 			end
 		end
 	end
@@ -24,7 +23,7 @@ class Board
 		for row in 1..num_of_rows do
 			print "row #{row} >> "
 			for column in 1..num_of_columns do
-				print "#{@contents[row - 1][column - 1].content}  "
+				print "#{@contents[row - 1][column - 1]}  "
 			end
 			puts "\n"
 		end
@@ -32,7 +31,7 @@ class Board
 	end
 
 	def is_occupied?(row, column) 
-		if @contents[row][column].content != '.'
+		if @contents[row][column] != '.'
 			return true
 		else
 			return false
@@ -70,14 +69,14 @@ class Board
 				bottom_of_column = 5
 			end
 		end
-		@contents[bottom_of_column][column_number].content = value
+		@contents[bottom_of_column][column_number] = value
 	end
 
 	def is_full?
 		is_full = true
 		@contents.each do |row|
-			row.each do |cell| 
-				if cell.empty? == true 
+			row.each do |content| 
+				if content == "."
 					is_full = false
 				end
 			end
