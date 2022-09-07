@@ -15,49 +15,37 @@ RSpec.describe Logic do
   it 'will detect a horizontal win' do 
     @board.populate_board
     ['a', 'b', 'c', 'd'].each {|column| @board.drop(column, 'x')}
-  
     @board.render
-
     expect(@logic.horizontal_win(@board, 'x')).to eq(true)
 
-    
     @board.populate_board
     ['a', 'c', 'e', 'g'].each {|column| @board.drop(column, 'x')}
-
     expect(@logic.horizontal_win(@board, 'x')).to eq(false)
   end 
 
   it 'will detect a vertical win' do 
-   
     @board.populate_board
     4.times {@board.drop('a', 'x')}
     @board.render
-
     expect(@logic.vertical_win(@board, 'x')).to eq(true)
 
-    
     @board.populate_board
     ['a', 'b', 'b', 'a'].each {|column| @board.drop(column, 'x')}
     @board.render
-
     expect(@logic.vertical_win(@board, 'x')).to eq(false)
   end
 
   it 'can detect if robot wins veritcally' do 
-    
     @board.populate_board
     4.times {@board.drop('a', 'o')}
     @board.render
-
     expect(@logic.vertical_win(@board, 'o')).to eq(true)
   end
 
   it 'can detect if robot wins horizontally' do 
-    
     @board.populate_board
     ['a', 'b', 'c', 'd'].each {|column| @board.drop(column, 'o')}
     @board.render
-
     expect(@logic.horizontal_win(@board, 'o')).to eq(true)
   end
 
