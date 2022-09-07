@@ -5,7 +5,8 @@ require './lib/logic'
 class Game
   attr_reader :running, 
               :has_printed_welcome, 
-              :board
+              :board, 
+              :can_run_turn
 
   def initialize
     @running = false 
@@ -15,6 +16,7 @@ class Game
     @board.populate_board
     @robot = Robot.new
     @logic = Logic.new
+    @can_run_turn = false
   end
 
   def welcome_greeting
@@ -89,6 +91,7 @@ class Game
     else 
       puts "Invalid input, please try again."
     end
+    @can_run_turn = true
   end
 
   def valid_input?(input)

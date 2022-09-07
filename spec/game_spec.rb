@@ -24,7 +24,9 @@ RSpec.describe Game do
   end
 
   it 'can take a turn' do 
-    
+    game2 = Game.new
+    game2.turn
+    expect(game2.can_run_turn).to eq(true)
   end
 
   it 'checks if input is a valid choice' do 
