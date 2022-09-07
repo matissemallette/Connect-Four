@@ -66,21 +66,14 @@ class Game
       else
         @board.drop(input, 'x')
 
-        if @logic.horizontal_win(@board, 'x') || @logic.vertical_win(@board, 'x') 
-          self.player_wins
-        end
-        if @logic.diagonal_win(@board, 'x') == true 
-          self.player_wins
+        if self.check_for_winner(@board, 'x') == true 
+          self.player_wins 
         end
 
         @robot.make_decision(@board)
         @board.drop(@robot.current_decision, 'o')
 
-        if @logic.horizontal_win(@board, 'o') || @logic.vertical_win(@board, 'o')
-          self.robot_wins
-        end
-
-        if @logic.diagonal_win(@board, 'o') == true
+        if self.check_for_winner(@board, 'o') == true 
           self.robot_wins
         end
 
@@ -126,5 +119,15 @@ class Game
     puts "The board is full, the game is a draw.\n\n"
     @board.populate_board
     @running = false
+  end
+
+  def check_for_winner(board, winner_symbol)
+    if @logic.horizontal_win(board, winner_symbol) 
+      return true
+    elsif @logic.vertical_win(board, winner_symbol)
+      return true
+    elsif @logic.diagonal_win(board, winner_symbol)
+      return true
+    end
   end
 end
