@@ -8,15 +8,7 @@ class Robot
   end
 
   def make_decision(board)
-    num_to_letter_map = {
-      0=>'a',
-      1=>'b',
-      2=>'c',
-      3=>'d',
-      4=>'e',
-      5=>'f',
-      6=>'g'
-    }
+    num_to_letter_map = ['a', 'b', 'c', 'd', 'e', 'f', 'g']
     random_number = rand(0..6)
     column_choice = num_to_letter_map[random_number]
     @current_decision = column_choice
