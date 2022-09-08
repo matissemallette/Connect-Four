@@ -66,7 +66,8 @@ class Game
         @board.drop(input, 'x')
 
         if self.check_for_winner(@board, 'x') == true 
-          self.player_wins 
+          self.player_wins
+          return
         end
 
         @robot.make_decision(@board)
@@ -74,6 +75,7 @@ class Game
 
         if self.check_for_winner(@board, 'o') == true 
           self.robot_wins
+          return
         end
 
         @board.render
@@ -105,12 +107,14 @@ class Game
 	end
 
   def player_wins
-    puts "=======Player wins!======="
+    @board.render
+    puts "=======Player wins!=======\n"
     @running = false
   end
 
   def robot_wins 
-    puts "=======Robot wins!======="
+    @board.render 
+    puts "=======Robot wins!=======\n"
     @running = false
   end
 

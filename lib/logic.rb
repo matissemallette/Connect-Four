@@ -37,11 +37,9 @@ class Logic
   def test_diagonal_win(board, character)
     num_of_rows = board.contents.length 
     num_of_columns = board.contents[0].length
-
     horizontal_search_range = num_of_columns - 4
     vertical_search_range = num_of_rows - 4 
-
-    for r in num_of_rows.downto(vertical_search_range)
+    for r in num_of_rows.downto(vertical_search_range) 
       for c in 0..horizontal_search_range
         current_diagonal_selection = []
         for i in 0..3 do 

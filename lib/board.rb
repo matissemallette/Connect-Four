@@ -49,7 +49,6 @@ class Board
 				bottom_of_column = i - 1
 				break
 			end
-
 			if i == 5 && self.is_occupied?(i, column_number) == false
 				bottom_of_column = 5
 			end
